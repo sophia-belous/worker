@@ -1,0 +1,12 @@
+{
+  "name": "worker",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "~1.15.0",
+    "express": "^4.13.3",
+    "method-override": "~2.3.5"
+  }
+}
