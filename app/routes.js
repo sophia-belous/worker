@@ -3,9 +3,7 @@ module.exports = function(app) {
     app.post('/api/validation/word', function(req, res) {
         var words = req.body.words;
         
-        var resultWords = [],
-            invalidWords = 0,
-            validWords = 0;
+        var resultWords = [];
         
         
         for (var i = 0; i < words.length; i++) {
@@ -13,21 +11,15 @@ module.exports = function(app) {
                 var word = words[i];
 
                 magic(word, function (result) {
-                    var status;
-                    if(result) {
-                        status = 1;
-                        validWords++;
-                    } else {
-                        status = 0;
-                        invalidWords++;
-                    }
+                    var status = result ? 1 : 0;
+                   
                     resultWords.push({
                         word: word,
                         status: status
                     });
                     if (resultWords.length === words.length) {
                         res.status(200, { "Access-Control-Allow-Origin": "*" })
-                        .json({words: resultWords, validWords: validWords, invalidWords: invalidWords});
+                        .json({words: resultWords});
                     }
                 });              
             })(i);
