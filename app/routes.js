@@ -2,24 +2,26 @@ module.exports = function(app) {
     
     app.post('/api/validation/word', function(req, res) {
         var words = req.body.words;
-        
-        var resultWords = [];
-        
+        var resultWords = {
+            words: []
+        };
         
         for (var i = 0; i < words.length; i++) {
+            
             (function(i) {
+                
                 var word = words[i];
 
                 magic(word, function (result) {
                     var status = result ? 1 : 0;
                    
-                    resultWords.push({
+                    resultWords.words.push({
                         word: word,
                         status: status
                     });
-                    if (resultWords.length === words.length) {
+                    if (resultWords.words.length === words.length) {
                         res.status(200, { "Access-Control-Allow-Origin": "*" })
-                        .json({words: resultWords});
+                        .json(resultWords.words);
                     }
                 });              
             })(i);

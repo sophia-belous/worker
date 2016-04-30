@@ -3,11 +3,11 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     methodOverride = require('method-override');
 
-var port = process.env.PORT || 56780;
+var port = process.env.PORT || 56782;
 
 app.use(bodyParser.json()); 
-app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
-app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(bodyParser.json({ type: 'application/vnd.api+json'}));
+app.use(bodyParser.urlencoded({limit: '50mb', parameterLimit: 100000, extended: false})); 
 
 app.use(methodOverride('X-HTTP-Method-Override')); 
 
